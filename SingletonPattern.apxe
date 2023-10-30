@@ -1,0 +1,21 @@
+public class SingletonClass {
+    static SingletonClass instance=null;
+    Integer Id=100;
+    
+    SingletonClass(){
+        Id++;
+        
+    }
+    
+    public static SingletonClass SingletonClassMethod(){
+        if(instance == null)
+        {
+            instance = new SingletonClass();                        
+        }      
+            return instance;                        
+    }
+    
+    public void doSomething(){
+        System.debug('Im doing something on Id:' + this.Id);
+    }
+}
