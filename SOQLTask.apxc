@@ -1,45 +1,48 @@
 public class SOQLQuery {
-    Employee__c[] e = [
-    Select id
-    from Employee__c
-];
 
-id[] idsList = new id[]{};
-For (Employee__c s : e) {
-    idsList.add(s.id);
-}
-
-AggregateResult [] l = [
-    Select count(Id) countID,ManagerId__c mngrID
-    from Employee__c
-    Group By ManagerId__c
-	Having ManagerId__c In :idsList 
-];
-
-ID[] mngrIDs = new ID[]{};
-
-For (AggregateResult s :l){   
-    mngrIDs.add((Id)s.get('mngrID'));
-}
-
-Employee__c[] empNames = [
-    Select name
-    from Employee__c
-    where Id IN :mngrIDs
-];
-
-Integer cts=0;
-Map<String,Integer> res= new Map<String,Integer>();
-For (AggregateResult s :l){
-    For(Employee__c empss: empNames)
-    {
-        res.put(empss.Name,(Integer)l[cts].get('countID'));
-    	cts++;
+    public void getMngrEmployeeCount(){
+        Employee__c[] e = [
+        Select id
+        from Employee__c
+    ];
+    
+    id[] idsList = new id[]{};
+    For (Employee__c s : e) {
+        idsList.add(s.id);
     }
-	cts=0;
+    
+    AggregateResult [] l = [
+        Select count(Id) countID,ManagerId__c mngrID
+        from Employee__c
+        Group By ManagerId__c
+        Having ManagerId__c In :idsList 
+    ];
+    
+    ID[] mngrIDs = new ID[]{};
+    
+    For (AggregateResult s :l){   
+        mngrIDs.add((Id)s.get('mngrID'));
+    }
+    
+    Employee__c[] empNames = [
+        Select name
+        from Employee__c
+        where Id IN :mngrIDs
+    ];
+    
+    Integer cts=0;
+    Map<String,Integer> res= new Map<String,Integer>();
+    For (AggregateResult s :l){
+        For(Employee__c empss: empNames)
+        {
+            res.put(empss.Name,(Integer)l[cts].get('countID'));
+            cts++;
+        }
+        cts=0;
+    }
+    System.debug(res);
+
+        
+    }
 }
-System.debug(res);
 
-
-
-}
