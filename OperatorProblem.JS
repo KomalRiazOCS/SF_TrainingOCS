@@ -1,15 +1,12 @@
-//"a<b OR (c==d AND e!=f)"
-const arr = ["OR", ["<", "a", "b"], ["AND", ["==", "c", "d"], ["!=", "e", "f"]]];
-  
-
-function arrayToExpression(arr) {
-    if (typeof arr === 'string') 
+function arrayToExpression(arr) {    
+    if(Array.isArray(arr))
     {
-        return arr;
-    } 
-    else 
-    {
+        
         const operator = arr[0];
+        if (!(validOperators.includes(operator))) { //Incase, the operator is invalid
+          throw new Error("Invalid Input!! Must enter a valid operator");
+
+        }
         const operands = [];
 
         for (let i = 1; i < arr.length; i++) 
@@ -17,15 +14,24 @@ function arrayToExpression(arr) {
             operands.push(arrayToExpression(arr[i]));
         }
 
-        if (operator === "OR") 
-            return operands.join(" OR ");            
-        else if (operator === "AND") 
-            return "(" + operands.join(" AND ") + ")";
+        if (operator === "NOT") 
+        {
+            if(operands.length!=1) //Incase, NOT have more than one operand
+            {
+                throw new Error("Invalid expression!! NOT operator can't take more than one operand");               
+            }           
+            return "( NOT " + operands + ")";            
+        }            
         else 
-            return operands.join(" " + operator + " ");
-
+            return "(" + operands.join(" " + operator + " ") + ")";
     }
+    else{
+        return arr;
+    }    
 }
-    
-const result = convertToExpression(arr);
-console.log(result);
+
+const arr = ["OR", ["<", "a", "b"], ["AND", ["==", "c", "d"], ["!=", "e", "f"]]];
+const validOperators = ["AND", "OR", "NOT", "<", ">",">=","<=", "!=", "==", "+", "-", "/", "*"];
+ 
+const result = arrayToExpression(arr);
+console.log(result); //"a<b OR (c==d AND e!=f)"
