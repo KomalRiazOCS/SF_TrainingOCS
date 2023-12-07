@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Delete Record" >
+        <div class="slds-m-around_medium">
+            <lightning-input label="Id" value={recordId} disabled class="slds-m-bottom_x-small"></lightning-input>
+            <lightning-layout>
+                <lightning-layout-item>
+                    <lightning-button label="Delete Company Record" variant="brand" onclick={onDeleteRecord}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="grow"></lightning-layout-item>
+                <lightning-layout-item>
+                    <lightning-button label="Cancel" onclick={onClose}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>             
+        </div>
+    </lightning-card>  
+</template>

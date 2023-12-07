@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Update Record" >
+        <div class="slds-m-around_medium">
+            <lightning-input label="Id" data-field="Id" value={recordId} disabled class="slds-m-bottom_x-small"></lightning-input>
+            <lightning-input label="Name" data-field="Name" value={recordData.Name} onchange={handleInputChange} class="slds-m-bottom_x-small"></lightning-input>
+            <lightning-input label="Email" data-field="Email__c" value={recordData.Email__c} onchange={handleInputChange} class="slds-m-bottom_x-small"></lightning-input>
+            <lightning-layout>
+                <lightning-layout-item>
+                    <lightning-button label="Update Company Record" variant="brand" onclick={onUpdateRecord}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="grow"></lightning-layout-item>
+                <lightning-layout-item>
+                    <lightning-button label="Cancel" onclick={onClose}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout> 
+           
+        </div>
+    </lightning-card>
+</template>
