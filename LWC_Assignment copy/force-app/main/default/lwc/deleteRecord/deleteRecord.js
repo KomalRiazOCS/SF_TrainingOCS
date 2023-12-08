@@ -6,7 +6,6 @@ import { refreshApex } from '@salesforce/apex';
 
 export default class DeleteRecord extends LightningElement {
     @api recordId; // Id of the record being deleted
-
     companyIds;
 
     @wire(fetchRecords)

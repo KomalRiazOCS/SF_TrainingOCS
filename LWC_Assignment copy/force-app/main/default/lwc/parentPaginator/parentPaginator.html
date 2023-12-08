@@ -8,9 +8,11 @@
             <!-- Display the update form when the editRecordId is set -->
             <template if:true={editRecordId}>
                 <c-update-record record-id={editRecordId} onclose={handleUpdateClose}></c-update-record>
+                <div class="slds-backdrop slds-backdrop_open"></div>
             </template>
             <template if:true={deleteRecordId}>
                 <c-delete-record record-id={deleteRecordId} onclose={handleDeleteClose}></c-delete-record>
+                <div class="slds-backdrop slds-backdrop_open"></div>
             </template>
         </div>
 
