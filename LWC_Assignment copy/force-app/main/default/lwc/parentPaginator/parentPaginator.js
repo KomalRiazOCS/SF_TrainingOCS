@@ -113,31 +113,33 @@ export default class ParentPaginator extends LightningElement {
         this.performSearch();
     }
 
+
     performSearch() {
-        if (this.searchTerm) {
-            searchCompanies({ searchTerm: this.searchTerm })
-                .then(result => {
-                    this.items = result;
-                    this.totalRecordCount = result.length;
-                    this.totalPage = Math.ceil(this.totalRecordCount / this.pageSize);
-                    this.updateData();
-                })
-                .catch(error => {
-                    console.error('Error in searching companies:', error);
-                });
-        } else {
-            // Fetch all records when the search term gets empty
-            fetchRecords()
-                .then(result => {
-                    this.items = result;
-                    this.totalRecordCount = result.length;
-                    this.totalPage = Math.ceil(this.totalRecordCount / this.pageSize);
-                    this.updateData();
-                })
-                .catch(error => {
-                    console.error('Error in fetching all records:', error);
-                });
+            if (this.searchTerm) {
+                searchCompanies({ searchTerm: this.searchTerm })
+                    .then(result => {
+                        this.items = result;
+                        this.totalRecordCount = result.length;
+                        this.totalPage = Math.ceil(this.totalRecordCount / this.pageSize);
+                        this.updateData();
+                    })
+                    .catch(error => {
+                        console.log('Error in searching companies:', error);
+                    });
+            } else {
+                // Fetch all records when the search term gets empty
+                fetchRecords()
+                    .then(result => {
+                        this.items = result;
+                        this.totalRecordCount = result.length;
+                        this.totalPage = Math.ceil(this.totalRecordCount / this.pageSize);
+                        this.updateData();
+                    })
+                    .catch(error => {
+                        console.log('Error in fetching all records:', error);
+                    });
+            }
         }
-    }
+
 
 }

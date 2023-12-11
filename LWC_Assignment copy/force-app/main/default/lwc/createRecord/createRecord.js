@@ -23,13 +23,24 @@ export default class CreateRecord extends LightningElement {
     onCreateRecord(){
         createCompany({ recordData: this.recordData })
         .then(result => {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Success',
-                    message: 'Record created successfully',
-                    variant: 'success',
-                })
-            );
+            if(result!=null){
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Success',
+                        message: 'Record created successfully',
+                        variant: 'success',
+                    })
+                );
+            }
+            else{
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error',
+                        message: 'An error occurred while creating the record',
+                        variant: 'error',
+                    })
+                );
+            }            
             return refreshApex(this.companies);
         })
         .catch(error => {
