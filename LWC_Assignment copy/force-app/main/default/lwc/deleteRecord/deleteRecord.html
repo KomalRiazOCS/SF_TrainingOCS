@@ -1,0 +1,21 @@
+<template>
+
+    <section class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <lightning-modal-body class="slds-p-around_medium" id="modal-content-id-1">
+                <lightning-input label="Id" value={recordId} disabled class="slds-m-bottom_x-small"></lightning-input>
+
+                <lightning-layout>
+                    <lightning-layout-item>
+                        <lightning-button label="Delete Company Record" variant="brand" onclick={onDeleteRecord}></lightning-button>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="grow"></lightning-layout-item>
+                    <lightning-layout-item>
+                        <lightning-button label="Cancel" onclick={onClose}></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>  
+            </lightning-modal-body>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

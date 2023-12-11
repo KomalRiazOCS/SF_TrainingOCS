@@ -1,0 +1,48 @@
+<template>
+    <lightning-card title="Display Companies" icon-name="custom:custom10">
+        <div class="slds-m-around_medium">
+            <lightning-input type="text" label="Search" value={searchTerm} onchange={handleSearch}></lightning-input>
+        </div>
+
+        <div class="slds-m-around_medium">
+            <!-- Display the update form when the editRecordId is set -->
+            <template if:true={editRecordId}>
+                <c-update-record record-id={editRecordId} onclose={handleUpdateClose}></c-update-record>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+            <template if:true={deleteRecordId}>
+                <c-delete-record record-id={deleteRecordId} onclose={handleDeleteClose}></c-delete-record>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+        </div>
+
+        <div class="slds-m-around_medium">
+            <template if:true={data}>
+                <lightning-datatable 
+                    data={data} 
+                    columns={columns} 
+                    key-field="id"  
+                    onrowaction={handleRowAction}  
+                >
+                </lightning-datatable>              
+            </template>
+        </div>
+
+        <div class="slds-m-around_medium">
+            <p class="slds-m-around_medium">{startingRecord} to {endingRecord} of {totalRecordCount}. page {page} of {totalPage}</p>
+            <lightning-layout>
+                <lightning-layout-item>
+                    <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={prevHandler}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="grow"></lightning-layout-item>
+                <lightning-layout-item>
+                    <lightning-button label="Next" icon-name="utility:chevronright" onclick={nextHandler}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout> 
+        </div>
+
+        
+    </lightning-card>
+
+    
+</template>
